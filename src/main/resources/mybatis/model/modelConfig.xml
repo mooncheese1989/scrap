@@ -9,5 +9,6 @@
 		<typeAlias type="com.spring.plt.quotation.vo.QuotationVO" alias="quotationVO"/>
 		<typeAlias type="com.spring.plt.consulting.vo.ConsultingVO" alias="consultingVO"/>
 		<typeAlias type="com.spring.plt.production.vo.ProductionVO" alias="productionVO"/>
+		<typeAlias type="com.spring.plt.scrap.vo.ScrapVO" alias="scrapVO"/>
 	</typeAliases>
 </configuration>

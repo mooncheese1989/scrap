@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.expertScrap">
+  	<resultMap id="scrapResult" type="scrapVO">
+   		<result property="no" column="no"/>
+   		<result property="compid" column="compid"/>
+   		<result property="expid" column="expid"/>
+   	</resultMap>
+	
+	<select id="printExpertScrap" resultMap="scrapResult">
+		<![CDATA[
+			select * from expertscrap order by no desc
+		]]>
+	</select>
+
+	<insert id="scrapExpert" parameterType="java.util.Map">
+		<![CDATA[
+			insert into expertscrap(no, compid, expid)
+			values(#{no}, #{compid}, #{expid})
+		]]>
+	</insert>
+	
+	<delete id="deleteExpertScrap" parameterType="int">
+		<![CDATA[
+			delete from expertscrap	where no = #{no}
+		]]>
+	</delete>
+</mapper>
+   	
