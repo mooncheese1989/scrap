@@ -16,13 +16,24 @@
 		]]>
 	</select>
 
-	<insert id="scrapExpert" parameterType="java.util.Map">
+
+	<insert id="scrapExpert" parameterType="scrapVO">
+		<![CDATA[
+		
+			INSERT INTO expertscrap(no, compid, expid)
+		  	VALUES((SELECT NVL(MAX(no)+1,0) FROM expertscrap), #{compid}, #{expid})
+        ]]>
+	</insert>
+
+
+<!--  
+	<insert id="scrapExpert" parameterType="scrapVO">
 		<![CDATA[
 			insert into expertscrap(no, compid, expid)
 			values(#{no}, #{compid}, #{expid})
 		]]>
 	</insert>
-	
+-->	
 	<delete id="deleteExpertScrap" parameterType="int">
 		<![CDATA[
 			delete from expertscrap	where no = #{no}

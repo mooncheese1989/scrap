@@ -16,11 +16,20 @@
 		]]>
 	</select>
 	
+	<insert id="scrapManu" parameterType="scrapVO">
+		<![CDATA[
+			INSERT INTO manuscrap(no, compid, manuid)
+		  	VALUES((SELECT NVL(MAX(no)+1,0) FROM manuscrap), #{compid}, #{manuid})
+        ]]>
+	</insert>
+	
 	<delete id="deleteManuScrap" parameterType="int">
 		<![CDATA[
 		 	delete from manuscrap where no = #{no}
 		]]>
 	</delete>
+	
+	
 
 </mapper>
    	

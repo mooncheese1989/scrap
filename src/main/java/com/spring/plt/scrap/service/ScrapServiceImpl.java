@@ -18,6 +18,7 @@ public class ScrapServiceImpl implements ScrapService{
 	@Autowired
 	ScrapDAO scrapDAO;
 	
+	//scrap 목록 출력
 	@Override
 	public List<ScrapVO> printExpertScrap() throws Exception{
 		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
@@ -30,18 +31,33 @@ public class ScrapServiceImpl implements ScrapService{
 		return manuScrapList;
 	}
 	
+	//insert scrap
 	@Override
-	public int scrapExpert(Map<String, Object> scrapMap) throws Exception{
-		System.out.println("scrapExpert() now loading..." + scrapMap);
-		return scrapDAO.scrapExpert(scrapMap);
-		
+	public void scrapExpert(ScrapVO scrap) throws DataAccessException{
+		scrapDAO.scrapExpert(scrap);
 	}
+
+	@Override
+	public void scrapManu(ScrapVO scrap) throws DataAccessException{
+		scrapDAO.scrapManu(scrap);
+		System.out.println("scrapService 완료");
+	}
+
+	
+	
+	
+//	@Override
+//	public int scrapExpert(Map<String, Object> scrapMap) throws Exception{
+//		System.out.println("scrapExpert() now loading..." + scrapMap);
+//		return scrapDAO.scrapExpert(scrapMap);		
+//	}
 	
 //	@Override
 //	public int scrapExpert(ScrapVO scrap) throws Exception{
 //		return scrapDAO.scrapExpert(scrap);
 //	}
 	
+	//scrap delete
 	@Override
 	public int deleteExpertScrap(int no) throws DataAccessException{
 		return scrapDAO.deleteExpertScrap(no);

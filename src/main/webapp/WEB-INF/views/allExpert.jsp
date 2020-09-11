@@ -35,8 +35,8 @@
 		    				<div class="book-wrap">
 		    					<div class="img d-flex justify-content-end w-100" style="background-image: url(${contextPath }/resources/images/book-1.jpg);">
 		    						<div class="in-text">
-		    							<a href="#" class="icon d-flex align-items-center justify-content-center" data-toggle="tooltip" data-placement="left" title="Add to Wishlist">
-		    								<span class="flaticon-heart-1"></span>
+		    							<a id="${expert.id }" class="icon d-flex align-items-center justify-content-center scrapClass" data-toggle="tooltip" data-placement="left" title="scrap">
+		    								<span id="${expert.id }" class="flaticon-heart-1"></span>
 		    							</a>
 		    							<a href="${contextPath }/viewExpert?id=${expert.id }" class="icon d-flex align-items-center justify-content-center" data-toggle="tooltip" data-placement="left" title="Quick View">
 		    								<span class="flaticon-search"></span>
@@ -123,6 +123,25 @@
         var serchArray = document.querySelectorAll("button");
         var changeHtml ="";
         console.log(serchArray)
+        var scrapArray = document.querySelectorAll(".scrapClass")
+        
+        for(var i = 0 ; i<scrapArray.length; i++){
+			
+			scrapArray[i].addEventListener("click",function(e){
+				var expertId = e.target.id
+				$.ajax({
+	            	url:"${contextPath}/scrap/scrapExpert.do",
+	            	type:"GET",
+	            	data:{"id":expertId},
+	            	dataType:"json",
+	            	success:function(data){
+	            		console.log("success")
+	            	}
+	            });
+			})
+		}
+        
+        
         
         for(var i = 0 ; i<serchArray.length; i++){
             serchArray[i].addEventListener("click",function(e){

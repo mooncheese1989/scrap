@@ -10,6 +10,11 @@ public class ScrapVO {
 	private String expid;
 	private String manuid;
 
+	@Override
+	public String toString() {
+		return "ScrapVO [no=" + no + ", compid=" + compid + ", expid=" + expid + ", manuid=" + manuid + "]";
+	}
+
 	public ScrapVO() {
 		super();
 	}

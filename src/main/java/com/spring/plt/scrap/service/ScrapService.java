@@ -13,10 +13,11 @@ public interface ScrapService {
 	
 	public List<ScrapVO> printManuScrap() throws Exception;
 
-	public int scrapExpert(Map<String, Object> scrapMap) throws Exception;
+//	public int scrapExpert(Map<String, Object> scrapMap) throws Exception;
 
+	public void scrapExpert(ScrapVO scrap) throws DataAccessException;
 	
-//	public int scrapExpert(ScrapVO scrap) throws Exception;
+	public void scrapManu(ScrapVO scrap) throws DataAccessException;
 
 	public int deleteExpertScrap(int no) throws DataAccessException;
 	

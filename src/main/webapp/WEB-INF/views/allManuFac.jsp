@@ -35,8 +35,8 @@
 		    				<div class="book-wrap">
 		    					<div class="img d-flex justify-content-end w-100" style="background-image: url(${contextPath }/resources/images/book-1.jpg);">
 		    						<div class="in-text">
-		    							<a href="#" class="icon d-flex align-items-center justify-content-center" data-toggle="tooltip" data-placement="left" title="Add to Wishlist">
-		    								<span class="flaticon-heart-1"></span>
+		    							<a id="${manuFac.id}" class="icon d-flex align-items-center justify-content-center scrapClass" data-toggle="tooltip" data-placement="left" title="scrap">
+		    								<span id="${manuFac.id }" class="flaticon-heart-1"></span>
 		    							</a>
 		    							<a href="${contextPath }/viewManuFac?id=${manuFac.id}" class="icon d-flex align-items-center justify-content-center" data-toggle="tooltip" data-placement="left" title="Quick View">
 		    								<span class="flaticon-search"></span>
@@ -149,6 +149,29 @@
         console.log(serchArray)
         var rangebox = document.querySelector(".form-control-range")
         var changeRange = document.querySelector(".changeRange");
+        
+        var scrapArray = document.querySelectorAll(".scrapClass")
+        console.log(scrapArray)
+        
+        for(var i = 0 ; i<scrapArray.length; i++){
+			
+			scrapArray[i].addEventListener("click",function(e){
+				var manuId = e.target.id
+				$.ajax({
+	            	url:"${contextPath}/scrap/scrapManu.do",
+	            	type:"GET",
+	            	data:{"id":manuId},
+	            	success:function(data){
+	            		console.log("success")
+	            	}
+	            });
+			})
+		}
+        
+        
+        
+        
+
         rangebox.addEventListener("change",function(e){
         	console.log(e.target.value);
         	console.log(changeRange);

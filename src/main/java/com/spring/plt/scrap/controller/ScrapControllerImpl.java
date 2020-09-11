@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +24,8 @@ public class ScrapControllerImpl implements ScrapController{
 	@Autowired
 	private ScrapVO scrapVO;
 	
+	
+	//scarp 목록 출력
 	@Override
 	@RequestMapping(value="/scrap/printExpertScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView printExpertScrap(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -41,6 +45,37 @@ public class ScrapControllerImpl implements ScrapController{
 		mav.addObject("manuScrapList", manuScrapList);
 		return mav;
 	}
+	
+	//insert scrap
+	@Override
+	@RequestMapping(value="/scrap/scrapExpert.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public void scrapExpert(@RequestParam("id") String expId,
+							HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		HttpSession session = request.getSession();
+//		String compId = (String)session.getAttribute("compId"); 로그인 기능 구현 되면 입력 주석 해제 할것
+		String compId = "compId";
+		scrapVO.setCompid(compId);
+		scrapVO.setExpid(expId);
+		scrapService.scrapExpert(scrapVO);
+	}
+	
+	@Override
+	@RequestMapping(value="/scrap/scrapManu.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public void scrapManu(@RequestParam("id") String manuId,
+							HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		HttpSession session = request.getSession();
+//		String compId = (String)session.getAttribute("compId"); 로그인 기능 구현 되면 입력 주석 해제 할것
+		String compId = "compId";
+		scrapVO.setCompid(compId);
+		scrapVO.setManuid(manuId);
+		scrapService.scrapManu(scrapVO);
+		System.out.println("scrapController완료!");
+	}
+	
 	
 //	@RequestMapping(value="/scrap/scrapExpert.do", method= {RequestMethod.GET, RequestMethod.POST})
 //	@ResponseBody
@@ -62,6 +97,7 @@ public class ScrapControllerImpl implements ScrapController{
 //		return mav;
 //	}
 	
+	//delete scrap
 	@Override
 	@RequestMapping(value="/scrap/deleteExpertScrap.do", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView deleteExpertScrap(@RequestParam("no") int no, 
