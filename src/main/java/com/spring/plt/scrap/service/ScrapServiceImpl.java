@@ -1,5 +1,6 @@
 package com.spring.plt.scrap.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class ScrapServiceImpl implements ScrapService{
 	@Autowired
 	ScrapDAO scrapDAO;
 	
-	//scrap ¸ñ·Ï Ãâ·Â
+	//scrap ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public List<ScrapVO> printExpertScrap() throws Exception{
 		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
@@ -31,6 +32,17 @@ public class ScrapServiceImpl implements ScrapService{
 		return manuScrapList;
 	}
 	
+	@Override
+	public Map<String, List<ScrapVO>> printScrapAll() throws Exception{
+		Map<String, List<ScrapVO>> allScrapList = new HashMap<String, List<ScrapVO>>();
+		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
+		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
+		allScrapList.put("expertScrap", expertScrapList);
+		allScrapList.put("manuScrap", manuScrapList);
+		System.out.println("allScrap ì¶œë ¥" + allScrapList);
+		return allScrapList;
+	}
+	
 	//insert scrap
 	@Override
 	public void scrapExpert(ScrapVO scrap) throws DataAccessException{
@@ -40,7 +52,7 @@ public class ScrapServiceImpl implements ScrapService{
 	@Override
 	public void scrapManu(ScrapVO scrap) throws DataAccessException{
 		scrapDAO.scrapManu(scrap);
-		System.out.println("scrapService ¿Ï·á");
+		System.out.println("scrapService ï¿½Ï·ï¿½");
 	}
 
 	

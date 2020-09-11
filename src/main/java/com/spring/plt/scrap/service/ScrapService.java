@@ -23,4 +23,6 @@ public interface ScrapService {
 	
 	public int deleteManuScrap(int no) throws DataAccessException;
 
+	Map printScrapAll() throws Exception;
+
 }

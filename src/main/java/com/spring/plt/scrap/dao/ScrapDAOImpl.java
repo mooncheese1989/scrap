@@ -15,15 +15,15 @@ public class ScrapDAOImpl implements ScrapDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//scrap¸ñ·Ï Ãâ·Â
+	//scrapï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
-	public List printExpertScrap() throws DataAccessException{
+	public List<ScrapVO> printExpertScrap() throws DataAccessException{
 		List<ScrapVO> expertScrapList = sqlSession.selectList("mapper.expertScrap.printExpertScrap");
 		return expertScrapList;
 	}
 	
 	@Override
-	public List printManuScrap() throws DataAccessException{
+	public List<ScrapVO> printManuScrap() throws DataAccessException{
 		List<ScrapVO> manuScrapList = sqlSession.selectList("mapper.manuScrap.printManuScrap");
 		return manuScrapList;
 	}
@@ -33,14 +33,14 @@ public class ScrapDAOImpl implements ScrapDAO{
 	@Override
 	public void scrapExpert(ScrapVO scrapVO) throws DataAccessException{
 		sqlSession.insert("mapper.expertScrap.scrapExpert", scrapVO);
-		System.out.println("scrapDAO query ¼öÇà ¿Ï·á!");
+		System.out.println("scrapDAO query ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½!");
 	}
 	
 	@Override
 	public void scrapManu(ScrapVO scrapVO) throws DataAccessException{
-		System.out.println("sqlDAO ÁøÀÔ");
+		System.out.println("sqlDAO ï¿½ï¿½ï¿½ï¿½");
 		sqlSession.insert("mapper.manuScrap.scrapManu", scrapVO);
-		System.out.println("scrapDAO query ¼öÇà ¿Ï·á!");
+		System.out.println("scrapDAO query ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½!");
 	}
 	
 	

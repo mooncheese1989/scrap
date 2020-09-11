@@ -1,6 +1,7 @@
 package com.spring.plt.scrap.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +25,7 @@ public class ScrapControllerImpl implements ScrapController{
 	private ScrapVO scrapVO;
 	
 	
-	//scarp ¸ñ·Ï Ãâ·Â
+	//scarp ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	@RequestMapping(value="/scrap/printExpertScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView printExpertScrap(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -46,6 +46,16 @@ public class ScrapControllerImpl implements ScrapController{
 		return mav;
 	}
 	
+	@Override
+	@RequestMapping(value="/scrap/printScrapAll.do",method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		Map allScrapList = scrapService.printScrapAll();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("allScrapList", allScrapList);
+		return mav;
+	}
+	
 	//insert scrap
 	@Override
 	@RequestMapping(value="/scrap/scrapExpert.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -54,7 +64,7 @@ public class ScrapControllerImpl implements ScrapController{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
-//		String compId = (String)session.getAttribute("compId"); ·Î±×ÀÎ ±â´É ±¸Çö µÇ¸é ÀÔ·Â ÁÖ¼® ÇØÁ¦ ÇÒ°Í
+//		String compId = (String)session.getAttribute("compId"); ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½Ô·ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
 		String compId = "compId";
 		scrapVO.setCompid(compId);
 		scrapVO.setExpid(expId);
@@ -68,12 +78,12 @@ public class ScrapControllerImpl implements ScrapController{
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
-//		String compId = (String)session.getAttribute("compId"); ·Î±×ÀÎ ±â´É ±¸Çö µÇ¸é ÀÔ·Â ÁÖ¼® ÇØÁ¦ ÇÒ°Í
+//		String compId = (String)session.getAttribute("compId"); ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½Ô·ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
 		String compId = "compId";
 		scrapVO.setCompid(compId);
 		scrapVO.setManuid(manuId);
 		scrapService.scrapManu(scrapVO);
-		System.out.println("scrapController¿Ï·á!");
+		System.out.println("scrapControllerï¿½Ï·ï¿½!");
 	}
 	
 	

@@ -28,4 +28,6 @@ public interface ScrapController {
 	public void scrapExpert(String expId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public void scrapManu(String manuId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

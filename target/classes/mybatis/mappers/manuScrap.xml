@@ -12,7 +12,9 @@
 	
 	<select id="printManuScrap" resultMap="scrapResult">
 		<![CDATA[
-			select * from manuscrap order by no desc
+			SELECT * FROM manuscrap
+			WHERE ROWNUM < 6
+			order by no desc
 		]]>
 	</select>
 	
