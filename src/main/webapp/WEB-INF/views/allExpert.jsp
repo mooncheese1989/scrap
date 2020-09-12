@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="${contextPath }/resources/css/style.css">
   </head>
   <body>
+  
 	<section class="ftco-section ftco-degree-bg">
       <div class="container">
         <div class="row">

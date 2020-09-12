@@ -50,9 +50,9 @@ public class ScrapControllerImpl implements ScrapController{
 	@RequestMapping(value="/scrap/printScrapAll.do",method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		Map allScrapList = scrapService.printScrapAll();
+		Map allScrapMap = scrapService.printScrapAll();
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("allScrapList", allScrapList);
+		mav.addObject("allScrapMap", allScrapMap);
 		return mav;
 	}
 	

@@ -34,13 +34,13 @@ public class ScrapServiceImpl implements ScrapService{
 	
 	@Override
 	public Map<String, List<ScrapVO>> printScrapAll() throws Exception{
-		Map<String, List<ScrapVO>> allScrapList = new HashMap<String, List<ScrapVO>>();
+		Map<String, List<ScrapVO>> allScrapMap = new HashMap<String, List<ScrapVO>>();
 		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
 		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
-		allScrapList.put("expertScrap", expertScrapList);
-		allScrapList.put("manuScrap", manuScrapList);
-		System.out.println("allScrap 출력" + allScrapList);
-		return allScrapList;
+		allScrapMap.put("expertScrap", expertScrapList);
+		allScrapMap.put("manuScrap", manuScrapList);
+		System.out.println("allScrap 출력" + allScrapMap);
+		return allScrapMap;
 	}
 	
 	//insert scrap

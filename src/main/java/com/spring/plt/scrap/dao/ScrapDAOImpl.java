@@ -44,17 +44,6 @@ public class ScrapDAOImpl implements ScrapDAO{
 	}
 	
 	
-//	@Override
-//	public int scrapExpert(Map scrapMap) throws Exception{
-//		return sqlSession.insert("mapper.expertScrap.scrapExpert", scrapMap);
-//	}
-	
-//	@Override
-//	public int scrapExpert(ScrapVO scrapVO) throws DataAccessException{
-//		int scrapNO = sqlSession.insert("mapper.expert.scrapExpert", scrapVO);
-//		return scrapNO;
-//	}
-	
 	
 	//delete scrap
 	@Override
