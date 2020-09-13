@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 @Repository("scrapDAO")
@@ -15,20 +16,35 @@ public class ScrapDAOImpl implements ScrapDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//scrap��� ���
+	//scrap
+	//전문가 4개만 출력
 	@Override
 	public List<ScrapVO> printExpertScrap() throws DataAccessException{
 		List<ScrapVO> expertScrapList = sqlSession.selectList("mapper.expertScrap.printExpertScrap");
 		return expertScrapList;
 	}
 	
+	//전문가 * 출력
+	@Override
+	public List<ScrapVO> printExpertScrapAll() throws DataAccessException{
+		List<ScrapVO> expertScrapAllList = sqlSession.selectList("mapper.expertScrap.printExpertScrapAll");
+		return expertScrapAllList;
+	}
+	
+	//제조업체 4개만 출력
 	@Override
 	public List<ScrapVO> printManuScrap() throws DataAccessException{
 		List<ScrapVO> manuScrapList = sqlSession.selectList("mapper.manuScrap.printManuScrap");
 		return manuScrapList;
 	}
 	
-	
+	//제조업체 * 출력
+	@Override
+	public List<ScrapVO> printManuScrapAll() throws DataAccessException{
+		List<ScrapVO> manuScrapAllList = sqlSession.selectList("mapper.manuScrap.printManuScrapAll");
+		return manuScrapAllList;
+		}
+		
 	//insert scrap
 	@Override
 	public void scrapExpert(ScrapVO scrapVO) throws DataAccessException{
@@ -57,4 +73,11 @@ public class ScrapDAOImpl implements ScrapDAO{
 		int result = sqlSession.delete("mapper.manuScrap.deleteManuScrap", no);
 		return result;
 	}
+	
+	@Override
+	public List<ExpertVO> allExpert(){
+		List<ExpertVO> expertList = sqlSession.selectList("mapper.expert.allExpert");
+		return expertList;
+	}
+	
 }

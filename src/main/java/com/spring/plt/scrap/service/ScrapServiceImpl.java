@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.dao.ScrapDAO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
@@ -19,21 +20,37 @@ public class ScrapServiceImpl implements ScrapService{
 	@Autowired
 	ScrapDAO scrapDAO;
 	
-	//scrap ��� ���
+	//scrap
+	//전문가 * 출력
+	@Override
+	public List<ScrapVO> printExpertScrapAll() throws Exception{
+		List<ScrapVO> expertScrapAllList = scrapDAO.printExpertScrapAll();
+		return expertScrapAllList;
+	}
+	
+	//전문가 4개만 출력
 	@Override
 	public List<ScrapVO> printExpertScrap() throws Exception{
 		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
 		return expertScrapList;
 	}
 	
+	//제조업체 * 출력
 	@Override
-	public List<ScrapVO> printManuScrap() throws Exception{
-		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
-		return manuScrapList;
+	public List<ScrapVO> printManuScrapAll() throws Exception{
+		List<ScrapVO> manuScrapAllList = scrapDAO.printManuScrapAll();
+		return manuScrapAllList;
 	}
 	
+	//제조업체 4개만 출력
+		@Override
+		public List<ScrapVO> printManuScrap() throws Exception{
+			List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
+			return manuScrapList;
+		}
+		
 	@Override
-	public Map<String, List<ScrapVO>> printScrapAll() throws Exception{
+	public Map<String, List<ScrapVO>> printScrap() throws Exception{
 		Map<String, List<ScrapVO>> allScrapMap = new HashMap<String, List<ScrapVO>>();
 		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
 		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
@@ -78,5 +95,11 @@ public class ScrapServiceImpl implements ScrapService{
 	@Override
 	public int deleteManuScrap(int no) throws DataAccessException{
 		return scrapDAO.deleteManuScrap(no);
+	}
+	
+	@Override
+	public List<ExpertVO> allExpert() {
+		List<ExpertVO> expertList = scrapDAO.allExpert();
+		return expertList;
 	}
 }

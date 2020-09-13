@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapDAO {
@@ -22,5 +23,11 @@ public interface ScrapDAO {
 	public int deleteExpertScrap(int no) throws DataAccessException;
 	
 	public int deleteManuScrap(int no) throws DataAccessException;
+
+	public List<ExpertVO> allExpert();
+
+	public List<ScrapVO> printExpertScrapAll() throws DataAccessException;
+
+	public List<ScrapVO> printManuScrapAll() throws DataAccessException;
 
 }

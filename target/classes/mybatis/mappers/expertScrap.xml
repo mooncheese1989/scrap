@@ -13,11 +13,18 @@
 	<select id="printExpertScrap" resultMap="scrapResult">
 		<![CDATA[
 			SELECT * FROM expertscrap
-			WHERE ROWNUM < 6
+			WHERE ROWNUM < 5
 			order by no desc
 		]]>
 	</select>
-
+	
+	<select id="printExpertScrapAll" resultMap="scrapResult">
+		<![CDATA[
+			SELECT * FROM expertscrap
+			order by no desc
+		]]>
+	</select>
+	
 
 	<insert id="scrapExpert" parameterType="scrapVO">
 		<![CDATA[

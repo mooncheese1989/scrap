@@ -1,5 +1,6 @@
 package com.spring.plt.scrap.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.service.ScrapService;
 import com.spring.plt.scrap.vo.ScrapVO;
 
@@ -26,33 +28,43 @@ public class ScrapControllerImpl implements ScrapController{
 	
 	
 	//scarp ��� ���
+	//전문가 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printExpertScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printExpertScrap(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView printExpertScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List expertScrapList = scrapService.printExpertScrap();
+		List expertScrapAllList = scrapService.printExpertScrapAll();
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("expertScrapList", expertScrapList);
+		mav.addObject("expertScrapAllList", expertScrapAllList);
 		return mav;
 	}
 	
+	//제조업체 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printManuScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printManuScrap(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView printManuScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List manuScrapList = scrapService.printManuScrap();
+		List manuScrapAllList = scrapService.printManuScrapAll();
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("manuScrapList", manuScrapList);
+		mav.addObject("manuScrapAllList", manuScrapAllList);
 		return mav;
 	}
 	
+	//제조업체/전문가 4개씩 출력
 	@Override
 	@RequestMapping(value="/scrap/printScrapAll.do",method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		Map allScrapMap = scrapService.printScrapAll();
+		Map allScrapMap = scrapService.printScrap();
+		List expertScrapList = scrapService.printExpertScrap();
+		List manuScrapList = scrapService.printManuScrap();
+		List<ExpertVO> expertList = new ArrayList<ExpertVO>();
+		expertList = scrapService.allExpert();
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("expertScrapList", expertScrapList);
+		mav.addObject("manuScrapList", manuScrapList);
 		mav.addObject("allScrapMap", allScrapMap);
+		mav.addObject("expertList", expertList);
 		return mav;
 	}
 	

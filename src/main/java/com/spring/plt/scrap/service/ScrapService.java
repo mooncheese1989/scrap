@@ -5,13 +5,19 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapService {
 	
+	public List<ScrapVO> printExpertScrapAll() throws Exception;
+
 	public List<ScrapVO> printExpertScrap() throws Exception;
 	
+	public List<ScrapVO> printManuScrapAll() throws Exception;
+	
 	public List<ScrapVO> printManuScrap() throws Exception;
+
 
 //	public int scrapExpert(Map<String, Object> scrapMap) throws Exception;
 
@@ -23,6 +29,9 @@ public interface ScrapService {
 	
 	public int deleteManuScrap(int no) throws DataAccessException;
 
-	Map printScrapAll() throws Exception;
+	public Map printScrap() throws Exception;
+
+	public List<ExpertVO> allExpert();
+
 
 }

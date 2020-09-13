@@ -11,9 +11,9 @@ import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapController {
 
-	public ModelAndView printExpertScrap(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView printExpertScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ModelAndView printManuScrap(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView printManuScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 //	public ModelAndView scrapExpert(@ModelAttribute("scrap") ScrapVO scrap,
 //			HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -30,4 +30,5 @@ public interface ScrapController {
 
 	ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	
 }
