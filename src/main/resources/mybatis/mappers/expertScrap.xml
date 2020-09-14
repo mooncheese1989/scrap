@@ -10,17 +10,21 @@
    		<result property="expid" column="expid"/>
    	</resultMap>
 	
-	<select id="printExpertScrap" resultMap="scrapResult">
+	<select id="printExpertScrap" resultMap="scrapResult" parameterType="String">
 		<![CDATA[
-			SELECT * FROM expertscrap
-			WHERE ROWNUM < 5
+			SELECT eps.no, eps.compid, eps.expid, ep.expname, ep.expbizfield, ep.exptel 
+			FROM expertscrap eps, expert ep
+			WHERE ROWNUM < 5 and compid = #{compid} and eps.expid = ep.id
 			order by no desc
 		]]>
 	</select>
 	
-	<select id="printExpertScrapAll" resultMap="scrapResult">
+	<select id="printExpertScrapAll" resultMap="scrapResult" parameterType="String">
 		<![CDATA[
-			SELECT * FROM expertscrap
+			
+			SELECT eps.no, eps.compid, eps.expid, ep.expname, ep.expbizfield, ep.exptel 
+			FROM expertscrap eps, expert ep
+			WHERE compid = #{compid} and eps.expid = ep.id
 			order by no desc
 		]]>
 	</select>

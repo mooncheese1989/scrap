@@ -49,10 +49,10 @@
 								
 							</div>
 							<div class="text pt-3 px-3 pb-4 text-center">
-								<h3>${expertScrap.expid }</h3>
+								<h3>${expertScrap.expName }</h3>
 								<div class="faded">
-									<p>${expertScrap.expid }분야</p>
-									<a href="${contextPath }/viewExpert?id=${expertScrap.expid }" class="btn btn-primary">View Dtail of Expert</a>
+									<p>${expertScrap.expBizField }<br>${expertScrap.expTel }</p>
+									<a href="${contextPath }/viewExpert?id=${expertScrap.expid }" class="btn btn-primary">상세페이지</a>
 	<!-- 
 									<ul class="ftco-social text-center">
 	  	                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>

@@ -23,37 +23,38 @@ public class ScrapServiceImpl implements ScrapService{
 	//scrap
 	//전문가 * 출력
 	@Override
-	public List<ScrapVO> printExpertScrapAll() throws Exception{
-		List<ScrapVO> expertScrapAllList = scrapDAO.printExpertScrapAll();
+	public List<ScrapVO> printExpertScrapAll(String compId) throws Exception{
+		List<ScrapVO> expertScrapAllList = scrapDAO.printExpertScrapAll(compId);
 		return expertScrapAllList;
 	}
 	
 	//전문가 4개만 출력
 	@Override
-	public List<ScrapVO> printExpertScrap() throws Exception{
-		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
+	public List<ScrapVO> printExpertScrap(String compId) throws Exception{
+		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap(compId);
+		System.out.println("ScrapService printExpertScrap(전문가 * 출력) 정상작동");
 		return expertScrapList;
 	}
 	
 	//제조업체 * 출력
 	@Override
-	public List<ScrapVO> printManuScrapAll() throws Exception{
-		List<ScrapVO> manuScrapAllList = scrapDAO.printManuScrapAll();
+	public List<ScrapVO> printManuScrapAll(String compId) throws Exception{
+		List<ScrapVO> manuScrapAllList = scrapDAO.printManuScrapAll(compId);
 		return manuScrapAllList;
 	}
 	
 	//제조업체 4개만 출력
 		@Override
-		public List<ScrapVO> printManuScrap() throws Exception{
-			List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
+		public List<ScrapVO> printManuScrap(String compId) throws Exception{
+			List<ScrapVO> manuScrapList = scrapDAO.printManuScrap(compId);
 			return manuScrapList;
 		}
 		
 	@Override
-	public Map<String, List<ScrapVO>> printScrap() throws Exception{
+	public Map<String, List<ScrapVO>> printScrap(String compId) throws Exception{
 		Map<String, List<ScrapVO>> allScrapMap = new HashMap<String, List<ScrapVO>>();
-		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap();
-		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap();
+		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap(compId);
+		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap(compId);
 		allScrapMap.put("expertScrap", expertScrapList);
 		allScrapMap.put("manuScrap", manuScrapList);
 		System.out.println("allScrap 출력" + allScrapMap);
@@ -97,9 +98,5 @@ public class ScrapServiceImpl implements ScrapService{
 		return scrapDAO.deleteManuScrap(no);
 	}
 	
-	@Override
-	public List<ExpertVO> allExpert() {
-		List<ExpertVO> expertList = scrapDAO.allExpert();
-		return expertList;
-	}
+
 }

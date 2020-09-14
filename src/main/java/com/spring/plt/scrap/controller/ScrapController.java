@@ -11,9 +11,11 @@ import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapController {
 
-	public ModelAndView printExpertScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView printExpertScrapAll(@RequestParam("compId") String compId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ModelAndView printManuScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView printManuScrapAll(@RequestParam("compId") String compId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 //	public ModelAndView scrapExpert(@ModelAttribute("scrap") ScrapVO scrap,
 //			HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -28,7 +30,8 @@ public interface ScrapController {
 	public void scrapExpert(String expId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public void scrapManu(String manuId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView printScrapAll(@RequestParam("compId") String compId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	
 }

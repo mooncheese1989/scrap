@@ -10,17 +10,20 @@
    		<result property="manuid" column="manuid"/>
    	</resultMap>
 	
-	<select id="printManuScrap" resultMap="scrapResult">
+	<select id="printManuScrap" resultMap="scrapResult" parameterType="String">
 		<![CDATA[
-			SELECT * FROM manuscrap
-			WHERE ROWNUM < 5
+			SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice
+			FROM manuscrap mns, manufacturer mn
+			WHERE ROWNUM < 5 and compid = #{compid} and mns.manuid = mn.id
 			order by no desc
 		]]>
 	</select>
 	
-	<select id="printManuScrapAll" resultMap="scrapResult">
+	<select id="printManuScrapAll" resultMap="scrapResult" parameterType="String">
 		<![CDATA[
-			SELECT * FROM manuscrap
+			SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice
+			FROM manuscrap mns, manufacturer mn
+			WHERE compid = #{compid} and mns.manuid = mn.id
 			order by no desc
 		]]>
 	</select>

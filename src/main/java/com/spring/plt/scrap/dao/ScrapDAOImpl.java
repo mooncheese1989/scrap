@@ -19,29 +19,30 @@ public class ScrapDAOImpl implements ScrapDAO{
 	//scrap
 	//전문가 4개만 출력
 	@Override
-	public List<ScrapVO> printExpertScrap() throws DataAccessException{
-		List<ScrapVO> expertScrapList = sqlSession.selectList("mapper.expertScrap.printExpertScrap");
+	public List<ScrapVO> printExpertScrap(String compId) throws DataAccessException{
+		List<ScrapVO> expertScrapList = sqlSession.selectList("mapper.expertScrap.printExpertScrap", compId);
+		System.out.println("ScrapDAO printExpertScrap(전문가 * 출력) 정상작동");
 		return expertScrapList;
 	}
 	
 	//전문가 * 출력
 	@Override
-	public List<ScrapVO> printExpertScrapAll() throws DataAccessException{
-		List<ScrapVO> expertScrapAllList = sqlSession.selectList("mapper.expertScrap.printExpertScrapAll");
+	public List<ScrapVO> printExpertScrapAll(String compId) throws DataAccessException{
+		List<ScrapVO> expertScrapAllList = sqlSession.selectList("mapper.expertScrap.printExpertScrapAll", compId);
 		return expertScrapAllList;
 	}
 	
 	//제조업체 4개만 출력
 	@Override
-	public List<ScrapVO> printManuScrap() throws DataAccessException{
-		List<ScrapVO> manuScrapList = sqlSession.selectList("mapper.manuScrap.printManuScrap");
+	public List<ScrapVO> printManuScrap(String compId) throws DataAccessException{
+		List<ScrapVO> manuScrapList = sqlSession.selectList("mapper.manuScrap.printManuScrap", compId);
 		return manuScrapList;
 	}
 	
 	//제조업체 * 출력
 	@Override
-	public List<ScrapVO> printManuScrapAll() throws DataAccessException{
-		List<ScrapVO> manuScrapAllList = sqlSession.selectList("mapper.manuScrap.printManuScrapAll");
+	public List<ScrapVO> printManuScrapAll(String compId) throws DataAccessException{
+		List<ScrapVO> manuScrapAllList = sqlSession.selectList("mapper.manuScrap.printManuScrapAll", compId);
 		return manuScrapAllList;
 		}
 		
@@ -74,10 +75,6 @@ public class ScrapDAOImpl implements ScrapDAO{
 		return result;
 	}
 	
-	@Override
-	public List<ExpertVO> allExpert(){
-		List<ExpertVO> expertList = sqlSession.selectList("mapper.expert.allExpert");
-		return expertList;
-	}
+	
 	
 }

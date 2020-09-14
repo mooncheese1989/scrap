@@ -31,20 +31,26 @@ public class ScrapControllerImpl implements ScrapController{
 	//전문가 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printExpertScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printExpertScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView printExpertScrapAll(@RequestParam("compId") String compId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List expertScrapAllList = scrapService.printExpertScrapAll();
+		List expertScrapAllList = scrapService.printExpertScrapAll(compId);
+		System.out.println("scrapVO" + scrapVO);
+		System.out.println("expertScrapAllList" + expertScrapAllList);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("expertScrapAllList", expertScrapAllList);
+		System.out.println("ScrapController printExpertScrapAll(전문가 * 출력) 정상작동");
 		return mav;
 	}
 	
 	//제조업체 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printManuScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printManuScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView printManuScrapAll(@RequestParam("compId") String compId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List manuScrapAllList = scrapService.printManuScrapAll();
+		List manuScrapAllList = scrapService.printManuScrapAll(compId);
+		System.out.println("manuScrapAllList" + manuScrapAllList);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("manuScrapAllList", manuScrapAllList);
 		return mav;
@@ -53,18 +59,16 @@ public class ScrapControllerImpl implements ScrapController{
 	//제조업체/전문가 4개씩 출력
 	@Override
 	@RequestMapping(value="/scrap/printScrapAll.do",method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printScrapAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public ModelAndView printScrapAll(@RequestParam("compId") String compId,
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		Map allScrapMap = scrapService.printScrap();
-		List expertScrapList = scrapService.printExpertScrap();
-		List manuScrapList = scrapService.printManuScrap();
-		List<ExpertVO> expertList = new ArrayList<ExpertVO>();
-		expertList = scrapService.allExpert();
+		Map allScrapMap = scrapService.printScrap(compId);
+		List expertScrapList = scrapService.printExpertScrap(compId);
+		List manuScrapList = scrapService.printManuScrap(compId);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("expertScrapList", expertScrapList);
 		mav.addObject("manuScrapList", manuScrapList);
 		mav.addObject("allScrapMap", allScrapMap);
-		mav.addObject("expertList", expertList);
 		return mav;
 	}
 	

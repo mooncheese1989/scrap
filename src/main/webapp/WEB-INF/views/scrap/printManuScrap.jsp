@@ -35,7 +35,7 @@
 			
 
 				<div class="mt-5">
-					<h2>전문가</h2>
+					<h2>제조업체</h2>
 				</div>
 				<hr/>
 				<div class="row">
@@ -49,10 +49,10 @@
 								
 							</div>
 							<div class="text pt-3 px-3 pb-4 text-center">
-								<h3>${manuScrap.expid }</h3>
+								<h3>${manuScrap.manuName }</h3>
 								<div class="faded">
-									<p>${manuScrap.expid }분야</p>
-									<a href="${contextPath }/viewExpert?id=${manuScrap.expid }" class="btn btn-primary">View Dtail of Expert</a>
+									<p>${manuScrap.manuBizType }<br>${manuScrap.productPrice }</p>
+									<a href="${contextPath }/viewExpert?id=${manuScrap.expid }" class="btn btn-primary">상세페이지</a>
 	<!-- 
 									<ul class="ftco-social text-center">
 	  	                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
