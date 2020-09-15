@@ -11,11 +11,11 @@ import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapService {
 	
-	public List<ScrapVO> printExpertScrapAll(String compId) throws Exception;
+	public List<ScrapVO> printExpertScrapAll(Map compMap) throws Exception;
 
 	public List<ScrapVO> printExpertScrap(String compId) throws Exception;
 	
-	public List<ScrapVO> printManuScrapAll(String compId) throws Exception;
+	public List<ScrapVO> printManuScrapAll(Map compMap) throws Exception;
 	
 	public List<ScrapVO> printManuScrap(String compId) throws Exception;
 
@@ -32,9 +32,8 @@ public interface ScrapService {
 
 	public Map<String, List<ScrapVO>> printScrap(String compId) throws Exception;
 
-	public int listCount();
-
-	public List<ScrapVO> selectAllScrap(PageVO pagevo);
-
+	public int listCount(String compId) throws Exception;
+	
+	public int listExpScrapCount(String compId) throws Exception;
 
 }

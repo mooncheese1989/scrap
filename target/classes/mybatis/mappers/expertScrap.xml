@@ -19,13 +19,14 @@
 		]]>
 	</select>
 	
-	<select id="printExpertScrapAll" resultMap="scrapResult" parameterType="String">
+	<select id="printExpertScrapAll" resultMap="scrapResult" parameterType="java.util.Map">
 		<![CDATA[
-			
-			SELECT eps.no, eps.compid, eps.expid, ep.expname, ep.expbizfield, ep.exptel 
-			FROM expertscrap eps, expert ep
-			WHERE compid = #{compid} and eps.expid = ep.id
-			order by no desc
+			SELECT no, compid, expid, expname, expbizfield, exptel
+	         FROM (SELECT eps.no, eps.compid, eps.expid, ep.expname, ep.expbizfield, ep.exptel,ROW_NUMBER() 
+	         OVER(ORDER BY eps.no DESC) 
+	         AS RNUM FROM expertscrap eps, expert ep
+	         WHERE compid = #{compId} and eps.expid = ep.id) MP
+	         WHERE RNUM BETWEEN #{pageVO.start} AND #{pageVO.end} ORDER BY no DESC
 		]]>
 	</select>
 	
@@ -52,5 +53,13 @@
 			delete from expertscrap	where no = #{no}
 		]]>
 	</delete>
+	
+	
+	<select id="listCount" resultType="int">
+		<![CDATA[
+			select count(*) from expertscrap
+			where compId=#{compId}
+		]]>
+	</select>
 </mapper>
    	

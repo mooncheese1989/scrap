@@ -27,8 +27,8 @@ public class ScrapServiceImpl implements ScrapService{
 	//scrap
 	//전문가 * 출력
 	@Override
-	public List<ScrapVO> printExpertScrapAll(String compId) throws Exception{
-		List<ScrapVO> expertScrapAllList = scrapDAO.printExpertScrapAll(compId);
+	public List<ScrapVO> printExpertScrapAll(Map compMap) throws Exception{
+		List<ScrapVO> expertScrapAllList = scrapDAO.printExpertScrapAll(compMap);
 		return expertScrapAllList;
 	}
 	
@@ -42,8 +42,8 @@ public class ScrapServiceImpl implements ScrapService{
 	
 	//제조업체 * 출력
 	@Override
-	public List<ScrapVO> printManuScrapAll(String compId) throws Exception{
-		List<ScrapVO> manuScrapAllList = scrapDAO.printManuScrapAll(compId);
+	public List<ScrapVO> printManuScrapAll(Map compMap) throws Exception{
+		List<ScrapVO> manuScrapAllList = scrapDAO.printManuScrapAll(compMap);
 		return manuScrapAllList;
 	}
 	
@@ -102,17 +102,12 @@ public class ScrapServiceImpl implements ScrapService{
 		return scrapDAO.deleteManuScrap(no);
 	}
 
-	//paging
-	public List<ScrapVO> selectAllScrap(PageVO pagevo) throws DataAccessException{
-	      List<ScrapVO> ScrapList = null;
-	      ScrapList = scrapDAO.selectAllScrap(pagevo);
-	      
-	      return ScrapList;
-	   }
-	   
-	   public int listCount() throws DataAccessException {
-	      return scrapDAO.listCount();
-	   }
-
+	public int listCount(String compId) throws Exception{
+		return scrapDAO.listCount(compId);
+	}
+	
+	public int listExpScrapCount(String compId) throws Exception{
+		return scrapDAO.listExpScrapCount(compId);
+	}
 
 }

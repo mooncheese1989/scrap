@@ -1,6 +1,6 @@
 package com.spring.plt.scrap.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.service.ScrapService;
 import com.spring.plt.scrap.vo.PageVO;
 import com.spring.plt.scrap.vo.ScrapVO;
@@ -32,28 +31,64 @@ public class ScrapControllerImpl implements ScrapController{
 	//전문가 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printExpertScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printExpertScrapAll(@RequestParam("compId") String compId,
+	public ModelAndView printExpertScrapAll(PageVO pageVO, @RequestParam(value="nowPage", required = false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List expertScrapAllList = scrapService.printExpertScrapAll(compId);
-		System.out.println("scrapVO" + scrapVO);
+		int total = scrapService.listExpScrapCount(compId);
+		System.out.println("total--------: "+total);
+	    if(nowPage == null && cntPerPage == null) {
+	        nowPage = "1";
+	        cntPerPage = "8";
+	    }else if(nowPage == null) {
+	        nowPage = "1";
+	    }else if(cntPerPage == null) {
+	        cntPerPage = "8";
+	    } //nowPage 현재 페이지, cntPerPage = 한페이지당 글 개수
+	    System.out.println(cntPerPage);
+	    pageVO = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	    Map compMap = new HashMap();
+	    compMap.put("compId", compId);
+	    compMap.put("pageVO", pageVO);
+		List expertScrapAllList = scrapService.printExpertScrapAll(compMap);
 		System.out.println("expertScrapAllList" + expertScrapAllList);
+		System.out.println("controller pageVO-----------------"+pageVO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("expertScrapAllList", expertScrapAllList);
-		System.out.println("ScrapController printExpertScrapAll(전문가 * 출력) 정상작동");
-		return mav;
+		mav.addObject("pageVO", pageVO);
+		return mav;		
 	}
+	
 	
 	//제조업체 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printManuScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView printManuScrapAll(@RequestParam("compId") String compId,
+	public ModelAndView printManuScrapAll(PageVO pageVO, @RequestParam(value="nowPage", required = false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		List manuScrapAllList = scrapService.printManuScrapAll(compId);
+		int total = scrapService.listCount(compId);
+	    if(nowPage == null && cntPerPage == null) {
+	        nowPage = "1";
+	        cntPerPage = "8";
+	    }else if(nowPage == null) {
+	        nowPage = "1";
+	    }else if(cntPerPage == null) {
+	        cntPerPage = "8";
+	    } //nowPage 현재 페이지, cntPerPage = 한페이지당 글 개수
+	    System.out.println(cntPerPage);
+	    pageVO = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	    Map compMap = new HashMap();
+	    compMap.put("compId", compId);
+	    compMap.put("pageVO", pageVO);
+		List manuScrapAllList = scrapService.printManuScrapAll(compMap);
 		System.out.println("manuScrapAllList" + manuScrapAllList);
+		System.out.println("controller pageVO-----------------"+pageVO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("manuScrapAllList", manuScrapAllList);
+		mav.addObject("pageVO", pageVO);
 		return mav;
 	}
 	
@@ -133,9 +168,10 @@ public class ScrapControllerImpl implements ScrapController{
 		HttpSession session = request.getSession();
 //		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
 		String compId = "compId";
-		String viewName = (String)request.getAttribute("viewName");
 		scrapService.deleteExpertScrap(no);
 		ModelAndView mav = new ModelAndView("redirect:/scrap/printExpertScrap.do?compId=" + compId);
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/scrap/printExpertScrap?compId="+compId);
 		return mav;
 		
 		
@@ -151,40 +187,13 @@ public class ScrapControllerImpl implements ScrapController{
 //		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
 		String compId = "compId";
 		ModelAndView mav = new ModelAndView("redirect:/scrap/printManuScrap.do?compId=" + compId);
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("/scrap/printManuScrap");
+//		mav.addObject("deleteManu", scrapService.deleteManuScrap(no));
+//		System.out.println("viewName = " +  mav);
 		return mav;
 	}
 	
 	
-	//paging
-	@RequestMapping(value = "/scrap/selectAllScrap.do", method = RequestMethod.GET)
-	   private ModelAndView selectAllScrap(PageVO pagevo, @RequestParam(value="nowPage", required = false) String nowPage, 
-			   										   @RequestParam(value="cntPerPage", required=false)String cntPerPage,
-			   										   HttpServletRequest request, HttpServletResponse response) throws Exception{
-		//@RequestParam : jsp 파라미터 매핑,  false -> 파라미터가 존재하지 않으면 nowPage는 null값 
-	      request.setCharacterEncoding("utf-8");
-	      response.setContentType("html/text;charset=utf-8");
-	      String viewName = (String)request.getAttribute("viewName");
-	      System.out.println(viewName);
-	      int total = scrapService.listCount();
-	      if(nowPage == null && cntPerPage == null) {
-	         nowPage = "1";
-	         cntPerPage = "5";
-	      }else if(nowPage == null) {
-	         nowPage = "1";
-	      }else if(cntPerPage == null) {
-	         cntPerPage = "5";
-	      } //nowPage 현재 페이지, cntPerPage = 한페이지당 글 개수
-	      System.out.println(cntPerPage);
-	      pagevo = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
-	      List<ScrapVO> ScrapList = scrapService.selectAllScrap(pagevo);
-	      System.out.println(ScrapList);
-	      ModelAndView mav = new ModelAndView();
-	      mav.addObject("ScrapList",ScrapList);
-	      mav.addObject("pagevo",pagevo);
-//	      mav.addObject("setTotalCount", setTotalCount);
-	      System.out.println(mav);
-	      return mav;
-	      
-	   }
 
 }

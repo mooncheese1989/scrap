@@ -7,14 +7,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.plt.scrap.vo.PageVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapController {
 
-	public ModelAndView printExpertScrapAll(@RequestParam("compId") String compId,
+	public ModelAndView printExpertScrapAll(PageVO pageVO, @RequestParam(value="nowPage", required = false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	public ModelAndView printManuScrapAll(@RequestParam("compId") String compId,
+	public ModelAndView printManuScrapAll(PageVO pageVO, @RequestParam(value="nowPage", required = false) String nowPage,
+			@RequestParam(value="cntPerPage", required=false)String cntPerPage, 
+			@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 //	public ModelAndView scrapExpert(@ModelAttribute("scrap") ScrapVO scrap,

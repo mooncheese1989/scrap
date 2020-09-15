@@ -105,21 +105,21 @@
     
     	
     	<!-- 페이지네이션 -->		
-    	</div>
     		<div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
               <ul>
-              	<c:if test="${pagevo.startPage != 1}">
-                	<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${pagevo.startPage -1}&cntPerPage=${pagevo.cntPerPage}">&lt;</a></li>
+              	<c:if test="${pageVO.startPage != 1}">
+                	<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${pageVO.startPage -1}&cntPerPage=${pageVO.cntPerPage}">&lt;</a></li>
                 </c:if>
-                <c:forEach begin = "${pagevo.startPage}" end = "${pagevo.endPage}" var="idx">
+                <c:forEach begin = "${pageVO.startPage}" end = "${pageVO.endPage}" var="idx">
                 	<c:choose>
-                		<c:when test="${idx == pagevo.nowPage }">
+                		<c:when test="${idx == pageVO.nowPage }">
                    			<li class="active"><span> ${idx} </span></li>
                   		</c:when>
-                   		<c:when test="${idx != pagevo.nowPage}">
-                   			<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${idx}&cntPerPage=${pagevo.cntPerPage}"> ${idx} </a></li>
+                   		<c:when test="${idx != pageVO.nowPage}">
+                   		<!-- compId 나중에 session에서 받도록 변경 -->
+                   			<li><a href="${contextPath}/scrap/printExpertScrap.do?compId=compId&nowPage=${idx}&cntPerPage=${pageVO.cntPerPage}"> ${idx} </a></li>
                    		</c:when>
                      </c:choose>
                 </c:forEach>
@@ -130,8 +130,6 @@
             </div>
           </div>
         </div>
-    	</div>
-    </section>
   
   
   

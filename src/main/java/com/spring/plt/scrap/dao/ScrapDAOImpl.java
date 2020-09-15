@@ -1,6 +1,7 @@
 package com.spring.plt.scrap.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class ScrapDAOImpl implements ScrapDAO{
 	
 	//전문가 * 출력
 	@Override
-	public List<ScrapVO> printExpertScrapAll(String compId) throws DataAccessException{
-		List<ScrapVO> expertScrapAllList = sqlSession.selectList("mapper.expertScrap.printExpertScrapAll", compId);
+	public List<ScrapVO> printExpertScrapAll(Map compMap) throws DataAccessException{
+		System.out.println("==============expert !!"+compMap);
+		List<ScrapVO> expertScrapAllList = sqlSession.selectList("mapper.expertScrap.printExpertScrapAll", compMap);
 		return expertScrapAllList;
 	}
 	
@@ -42,8 +44,9 @@ public class ScrapDAOImpl implements ScrapDAO{
 	
 	//제조업체 * 출력
 	@Override
-	public List<ScrapVO> printManuScrapAll(String compId) throws DataAccessException{
-		List<ScrapVO> manuScrapAllList = sqlSession.selectList("mapper.manuScrap.printManuScrapAll", compId);
+	public List<ScrapVO> printManuScrapAll(Map compMap) throws DataAccessException{
+		System.out.println("==============manu !!"+compMap);
+		List<ScrapVO> manuScrapAllList = sqlSession.selectList("mapper.manuScrap.printManuScrapAll", compMap);
 		return manuScrapAllList;
 		}
 		
@@ -76,22 +79,12 @@ public class ScrapDAOImpl implements ScrapDAO{
 		return result;
 	}
 	
+	public int listCount(String compId) throws Exception{
+		return sqlSession.selectOne("mapper.manuScrap.listCount", compId);
+	}
 	
-	//paging
-	@Override
-	   public List<ScrapVO> selectAllScrap(PageVO pagevo) throws DataAccessException{
-	      List<ScrapVO> ScrapList = null;
-	      ScrapList = sqlSession.selectList("mapper.startup.selectAllstartup",pagevo);
-	      return ScrapList;
-	   }
-	   
-	   @Override
-	   public int listCount() throws DataAccessException{
-	      int listCount = sqlSession.selectOne("mapper.startup.listCount");
-	      return listCount;
-	   } 
-
-	
-	
+	public int listExpScrapCount(String compId) throws Exception{
+		return sqlSession.selectOne("mapper.expertScrap.listCount", compId);
+	}
 	
 }
