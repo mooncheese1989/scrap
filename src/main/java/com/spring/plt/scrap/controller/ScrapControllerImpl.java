@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.service.ScrapService;
+import com.spring.plt.scrap.vo.PageVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 @Controller("scrapController")
@@ -152,4 +153,38 @@ public class ScrapControllerImpl implements ScrapController{
 		ModelAndView mav = new ModelAndView("redirect:/scrap/printManuScrap.do?compId=" + compId);
 		return mav;
 	}
+	
+	
+	//paging
+	@RequestMapping(value = "/scrap/selectAllScrap.do", method = RequestMethod.GET)
+	   private ModelAndView selectAllScrap(PageVO pagevo, @RequestParam(value="nowPage", required = false) String nowPage, 
+			   										   @RequestParam(value="cntPerPage", required=false)String cntPerPage,
+			   										   HttpServletRequest request, HttpServletResponse response) throws Exception{
+		//@RequestParam : jsp 파라미터 매핑,  false -> 파라미터가 존재하지 않으면 nowPage는 null값 
+	      request.setCharacterEncoding("utf-8");
+	      response.setContentType("html/text;charset=utf-8");
+	      String viewName = (String)request.getAttribute("viewName");
+	      System.out.println(viewName);
+	      int total = scrapService.listCount();
+	      if(nowPage == null && cntPerPage == null) {
+	         nowPage = "1";
+	         cntPerPage = "5";
+	      }else if(nowPage == null) {
+	         nowPage = "1";
+	      }else if(cntPerPage == null) {
+	         cntPerPage = "5";
+	      } //nowPage 현재 페이지, cntPerPage = 한페이지당 글 개수
+	      System.out.println(cntPerPage);
+	      pagevo = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
+	      List<ScrapVO> ScrapList = scrapService.selectAllScrap(pagevo);
+	      System.out.println(ScrapList);
+	      ModelAndView mav = new ModelAndView();
+	      mav.addObject("ScrapList",ScrapList);
+	      mav.addObject("pagevo",pagevo);
+//	      mav.addObject("setTotalCount", setTotalCount);
+	      System.out.println(mav);
+	      return mav;
+	      
+	   }
+
 }

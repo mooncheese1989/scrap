@@ -110,13 +110,22 @@
           <div class="col text-center">
             <div class="block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+              	<c:if test="${pagevo.startPage != 1}">
+                	<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${pagevo.startPage -1}&cntPerPage=${pagevo.cntPerPage}">&lt;</a></li>
+                </c:if>
+                <c:forEach begin = "${pagevo.startPage}" end = "${pagevo.endPage}" var="idx">
+                	<c:choose>
+                		<c:when test="${idx == pagevo.nowPage }">
+                   			<li class="active"><span> ${idx} </span></li>
+                  		</c:when>
+                   		<c:when test="${idx != pagevo.nowPage}">
+                   			<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${idx}&cntPerPage=${pagevo.cntPerPage}"> ${idx} </a></li>
+                   		</c:when>
+                     </c:choose>
+                </c:forEach>
+                 
+                   <li><a href="#">&gt;</a></li>
+              	
               </ul>
             </div>
           </div>

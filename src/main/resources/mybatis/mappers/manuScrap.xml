@@ -12,11 +12,12 @@
 	
 	<select id="printManuScrap" resultMap="scrapResult" parameterType="String">
 		<![CDATA[
-			SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice
-			FROM manuscrap mns, manufacturer mn
-			WHERE ROWNUM < 5 and compid = #{compid} and mns.manuid = mn.id
-			order by no desc
-		]]>
+         	SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice
+         	FROM (SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice,ROW_NUMBER() 
+         	OVER(ORDER BY mns.no DESC) 
+         	AS RNUM FROM manuscrap mns, manufacturer mn) MP 
+         	WHERE RNUM BETWEEN #{start} AND #{end} ORDER BY mns.no DESC
+      	]]>
 	</select>
 	
 	<select id="printManuScrapAll" resultMap="scrapResult" parameterType="String">
@@ -41,7 +42,7 @@
 		 	delete from manuscrap where no = #{no}
 		]]>
 	</delete>
-	
+
 	
 
 </mapper>

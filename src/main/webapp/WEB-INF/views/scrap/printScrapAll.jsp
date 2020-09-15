@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>printManuScrap.do</title>
+    <title>printScrapAll.do</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
@@ -24,23 +24,24 @@
     <link rel="stylesheet" href="${contextPath }/resources/css/style.css">
   </head>
   <body>
- 
+		
 		
 		<section class="ftco-section">
 			<div class="container">
 				
+				 
+				 
 				
 				
-				
-			
-
-				<div class="mt-5">
+				<div class="subtitle">
 					<h2>제조업체</h2>
 				</div>
 				<hr/>
 				<div class="row">
-				<!-- 전문가 -->
-					<c:forEach var="manuScrap" items="${manuScrapAllList }">
+				<!-- 제조업체 -->
+				
+					
+					<c:forEach var="allScrap" items="${manuScrapList }">
 					<!-- for -->
 					<div class="col-md-6 col-lg-3 ftco-animate">
 						<div class="staff">						
@@ -49,11 +50,11 @@
 								
 							</div>
 							<div class="text pt-3 px-3 pb-4 text-center">
-								<h3>${manuScrap.manuName }</h3>
+								<h3>${allScrap.manuName }</h3>
 								<div class="faded">
-									<p>${manuScrap.manuBizType }<br>${manuScrap.productPrice }</p>
-									<a href="${contextPath }/viewExpert?id=${manuScrap.expid }" class="btn btn-primary">상세페이지</a>
-									<a href="${contextPath }/scrap/deleteManuScrap.do?no=${manuScrap.no}" class="btn btn-primary">삭제</a>
+									<p>${allScrap.manuBizType }<br>${allScrap.productPrice }</p>
+									<a href="${contextPath }/viewManuFac?id=${allScrap.manuid}" class="btn btn-primary">상세페이지</a>
+									 
 	<!-- 
 									<ul class="ftco-social text-center">
 	  	                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
@@ -67,7 +68,59 @@
 						</div>
 					</div>
 					</c:forEach>
+				
+					
 				</div><!-- row end -->
+				<div style="float:right;">
+					<a href="${contextPath }/scrap/printManuScrap.do?compId=compId" class="btn btn-primary">더보기</a>
+					<!-- 합친 후 compId 는 세션의 값을 가져와 사용자를 식별할 수 있도록 수정 -->
+				</div>
+				
+			
+
+				<div class="mt-5">
+					<h2>전문가</h2>
+				</div>
+				<hr/>
+				<div class="row">
+				<!-- 전문가 -->
+				
+					
+					<c:forEach var="allScrap" items="${expertScrapList }">
+					<!-- for -->
+					<div class="col-md-6 col-lg-3 ftco-animate">
+						<div class="staff">						
+							<div class="img-wrap d-flex align-items-stretch">
+								<div class="img align-self-stretch" style="background-image: url(${contextPath }/resources/images/staff-1.jpg);"></div>
+								
+							</div>
+							<div class="text pt-3 px-3 pb-4 text-center">
+								<h3>${allScrap.expName }</h3>
+								<div class="faded">
+									<p>${allScrap.expBizField }<br>${allScrap.expTel }</p>
+									<a href="${contextPath }/viewExpert?id=${allScrap.expid }" class="btn btn-primary">상세페이지</a>
+	<!-- 
+									<ul class="ftco-social text-center">
+	  	                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
+		                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>
+		                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a></li>
+		                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
+		             				</ul>
+		             				-->
+	             				</div>
+							</div>														
+						</div>
+					</div>
+					</c:forEach>
+				
+					
+				</div><!-- row end -->
+				<div style="float:right;">
+					<a href="${contextPath }/scrap/printExpertScrap.do?compId=compId" class="btn btn-primary">더보기</a>
+					<!-- 합친 후 compId 는 세션의 값을 가져와 사용자를 식별할 수 있도록 수정 -->
+					
+				</div>
+				
 				
 				
 			
@@ -104,33 +157,7 @@
   -->
     
     	
-    	<!-- 페이지네이션 -->		
-    	</div>
-    		<div class="row mt-5">
-          <div class="col text-center">
-            <div class="block-27">
-              <ul>
-                <c:if test="${pagevo.startPage != 1}">
-                	<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${pagevo.startPage -1}&cntPerPage=${pagevo.cntPerPage}">&lt;</a></li>
-                </c:if>
-                <c:forEach begin = "${pagevo.startPage}" end = "${pagevo.endPage}" var="idx">
-                	<c:choose>
-                		<c:when test="${idx == pagevo.nowPage }">
-                   			<li class="active"><span> ${idx} </span></li>
-                  		</c:when>
-                   		<c:when test="${idx != pagevo.nowPage}">
-                   			<li><a href="${contextPath}/scrap/selectAllScrap.do?nowPage=${idx}&cntPerPage=${pagevo.cntPerPage}"> ${idx} </a></li>
-                   		</c:when>
-                     </c:choose>
-                </c:forEach>
-                 
-                   <li><a href="#">&gt;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-    	</div>
-    </section>
+    
   
   
   

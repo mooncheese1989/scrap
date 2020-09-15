@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.spring.plt.expert.vo.ExpertVO;
+import com.spring.plt.scrap.vo.PageVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 @Repository("scrapDAO")
@@ -74,6 +75,22 @@ public class ScrapDAOImpl implements ScrapDAO{
 		int result = sqlSession.delete("mapper.manuScrap.deleteManuScrap", no);
 		return result;
 	}
+	
+	
+	//paging
+	@Override
+	   public List<ScrapVO> selectAllScrap(PageVO pagevo) throws DataAccessException{
+	      List<ScrapVO> ScrapList = null;
+	      ScrapList = sqlSession.selectList("mapper.startup.selectAllstartup",pagevo);
+	      return ScrapList;
+	   }
+	   
+	   @Override
+	   public int listCount() throws DataAccessException{
+	      int listCount = sqlSession.selectOne("mapper.startup.listCount");
+	      return listCount;
+	   } 
+
 	
 	
 	

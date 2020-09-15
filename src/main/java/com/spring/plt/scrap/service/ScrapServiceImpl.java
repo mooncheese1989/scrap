@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.plt.expert.vo.ExpertVO;
 import com.spring.plt.scrap.dao.ScrapDAO;
+import com.spring.plt.scrap.vo.PageVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 @Service("scrapService")
@@ -19,6 +20,9 @@ import com.spring.plt.scrap.vo.ScrapVO;
 public class ScrapServiceImpl implements ScrapService{
 	@Autowired
 	ScrapDAO scrapDAO;
+	
+	@Autowired
+	private PageVO pagevo;
 	
 	//scrap
 	//전문가 * 출력
@@ -97,6 +101,18 @@ public class ScrapServiceImpl implements ScrapService{
 	public int deleteManuScrap(int no) throws DataAccessException{
 		return scrapDAO.deleteManuScrap(no);
 	}
-	
+
+	//paging
+	public List<ScrapVO> selectAllScrap(PageVO pagevo) throws DataAccessException{
+	      List<ScrapVO> ScrapList = null;
+	      ScrapList = scrapDAO.selectAllScrap(pagevo);
+	      
+	      return ScrapList;
+	   }
+	   
+	   public int listCount() throws DataAccessException {
+	      return scrapDAO.listCount();
+	   }
+
 
 }

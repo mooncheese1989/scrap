@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.spring.plt.expert.vo.ExpertVO;
+import com.spring.plt.scrap.vo.PageVO;
 import com.spring.plt.scrap.vo.ScrapVO;
 
 public interface ScrapService {
@@ -30,6 +31,10 @@ public interface ScrapService {
 	public int deleteManuScrap(int no) throws DataAccessException;
 
 	public Map<String, List<ScrapVO>> printScrap(String compId) throws Exception;
+
+	public int listCount();
+
+	public List<ScrapVO> selectAllScrap(PageVO pagevo);
 
 
 }
