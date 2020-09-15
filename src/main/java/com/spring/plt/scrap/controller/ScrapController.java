@@ -33,5 +33,6 @@ public interface ScrapController {
 	public ModelAndView printScrapAll(@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+
 	
 }

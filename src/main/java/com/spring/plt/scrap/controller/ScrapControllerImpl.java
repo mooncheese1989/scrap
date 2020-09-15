@@ -126,12 +126,18 @@ public class ScrapControllerImpl implements ScrapController{
 	//delete scrap
 	@Override
 	@RequestMapping(value="/scrap/deleteExpertScrap.do", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView deleteExpertScrap(@RequestParam("no") int no, 
+	public ModelAndView deleteExpertScrap(@RequestParam("no") int no,
 						HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+//		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
+		String compId = "compId";
+		String viewName = (String)request.getAttribute("viewName");
 		scrapService.deleteExpertScrap(no);
-		ModelAndView mav = new ModelAndView("redirect:/scrap/printExpertScrap.do");
+		ModelAndView mav = new ModelAndView("redirect:/scrap/printExpertScrap.do?compId=" + compId);
 		return mav;
+		
+		
 	}
 	
 	@Override
@@ -140,7 +146,10 @@ public class ScrapControllerImpl implements ScrapController{
 						HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		scrapService.deleteManuScrap(no);
-		ModelAndView mav = new ModelAndView("redirect:/scrap/printManuScrap.do");
+		HttpSession session = request.getSession();
+//		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
+		String compId = "compId";
+		ModelAndView mav = new ModelAndView("redirect:/scrap/printManuScrap.do?compId=" + compId);
 		return mav;
 	}
 }
