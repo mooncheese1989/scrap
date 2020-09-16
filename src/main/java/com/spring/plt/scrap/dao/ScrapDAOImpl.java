@@ -55,9 +55,7 @@ public class ScrapDAOImpl implements ScrapDAO{
 	
 	@Override
 	public void scrapManu(ScrapVO scrapVO) throws DataAccessException{
-		System.out.println("sqlDAO ����");
 		sqlSession.insert("mapper.manuScrap.scrapManu", scrapVO);
-		System.out.println("scrapDAO query ���� �Ϸ�!");
 	}
 	
 	

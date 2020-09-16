@@ -36,7 +36,6 @@ public class ScrapServiceImpl implements ScrapService{
 	@Override
 	public List<ScrapVO> printExpertScrap(String compId) throws Exception{
 		List<ScrapVO> expertScrapList = scrapDAO.printExpertScrap(compId);
-		System.out.println("ScrapService printExpertScrap(전문가 * 출력) 정상작동");
 		return expertScrapList;
 	}
 	
@@ -61,7 +60,6 @@ public class ScrapServiceImpl implements ScrapService{
 		List<ScrapVO> manuScrapList = scrapDAO.printManuScrap(compId);
 		allScrapMap.put("expertScrap", expertScrapList);
 		allScrapMap.put("manuScrap", manuScrapList);
-		System.out.println("allScrap 출력" + allScrapMap);
 		return allScrapMap;
 	}
 	
@@ -77,19 +75,6 @@ public class ScrapServiceImpl implements ScrapService{
 		System.out.println("scrapService �Ϸ�");
 	}
 
-	
-	
-	
-//	@Override
-//	public int scrapExpert(Map<String, Object> scrapMap) throws Exception{
-//		System.out.println("scrapExpert() now loading..." + scrapMap);
-//		return scrapDAO.scrapExpert(scrapMap);		
-//	}
-	
-//	@Override
-//	public int scrapExpert(ScrapVO scrap) throws Exception{
-//		return scrapDAO.scrapExpert(scrap);
-//	}
 	
 	//scrap delete
 	@Override

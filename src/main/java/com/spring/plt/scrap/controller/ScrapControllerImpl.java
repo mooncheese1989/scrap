@@ -28,6 +28,8 @@ public class ScrapControllerImpl implements ScrapController{
 	private ScrapVO scrapVO;
 	
 	
+//	compId를 로그인 후 session에서 받아오는 것으로 수정해야합니다  - parent key 오류
+	
 //	scrap출력
 	//전문가 * 출력
 	@Override
@@ -37,8 +39,9 @@ public class ScrapControllerImpl implements ScrapController{
 			@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
+		
+//		paging code
 		int total = scrapService.listExpScrapCount(compId);
-		System.out.println("total--------: "+total);
 	    if(nowPage == null && cntPerPage == null) {
 	        nowPage = "1";
 	        cntPerPage = "8";
@@ -47,14 +50,11 @@ public class ScrapControllerImpl implements ScrapController{
 	    }else if(cntPerPage == null) {
 	        cntPerPage = "8";
 	    } //nowPage 현재 페이지, cntPerPage = 한페이지당 글 개수
-	    System.out.println(cntPerPage);
 	    pageVO = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 	    Map compMap = new HashMap();
 	    compMap.put("compId", compId);
 	    compMap.put("pageVO", pageVO);
 		List expertScrapAllList = scrapService.printExpertScrapAll(compMap);
-		System.out.println("expertScrapAllList" + expertScrapAllList);
-		System.out.println("controller pageVO-----------------"+pageVO);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("expertScrapAllList", expertScrapAllList);
 		mav.addObject("pageVO", pageVO);
@@ -70,6 +70,8 @@ public class ScrapControllerImpl implements ScrapController{
 			@RequestParam("compId") String compId,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
+		
+//		paging code
 		int total = scrapService.listCount(compId);
 	    if(nowPage == null && cntPerPage == null) {
 	        nowPage = "1";
@@ -79,15 +81,11 @@ public class ScrapControllerImpl implements ScrapController{
 	    }else if(cntPerPage == null) {
 	        cntPerPage = "8";
 	    } //nowPage 현재 페이지, cntPerPage = 한페이지당 글 개수
-	    System.out.println(cntPerPage);
 	    pageVO = new PageVO(total, Integer.parseInt(nowPage),Integer.parseInt(cntPerPage));
 	    Map compMap = new HashMap();
 	    compMap.put("compId", compId);
 	    compMap.put("pageVO", pageVO);
-	    System.out.println("=========compMap=" + compMap + " -- compId= " + compId );
 		List manuScrapAllList = scrapService.printManuScrapAll(compMap);
-		System.out.println("manuScrapAllList" + manuScrapAllList);
-		System.out.println("controller manuScrapAllList-----------------"+manuScrapAllList);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("manuScrapAllList", manuScrapAllList);
 		mav.addObject("pageVO", pageVO);
@@ -131,10 +129,7 @@ public class ScrapControllerImpl implements ScrapController{
 			scrapService.scrapExpert(scrapVO);
 		}
 		else {
-//			out.println("<script>");
-//			out.println("alert('중복된 요청입니다.');");
-//			out.println("history.go(-1);");
-//			out.println("</script>");
+//			중복된 요청 시 alert가 나오도록 수정해야 합니다
 			System.out.println("===========controller scrapExpert() 중복된 expid입니다===========");
 		}
 
@@ -156,31 +151,12 @@ public class ScrapControllerImpl implements ScrapController{
 			scrapService.scrapManu(scrapVO);
 		}
 		else {
+//			중복된 요청 시 alert가 나오도록 수정해야 합니다
 			System.out.println("===========controller scrapExpert() 중복된 manuid입니다===========");
 		}
 		
 	}
 	
-	
-//	@RequestMapping(value="/scrap/scrapExpert.do", method= {RequestMethod.GET, RequestMethod.POST})
-//	@ResponseBody
-//	public ModelAndView scrapExpert(HttpServletRequest request, HttpServletResponse response) throws Exception{
-//		request.setCharacterEncoding("utf-8");
-//		Map 
-//	}
-	
-//	@Override
-//	@RequestMapping(value="/scrap/scrapExpert.do", method={RequestMethod.GET, RequestMethod.POST})
-//	public ModelAndView scrapExpert(@ModelAttribute("scrap") ScrapVO scrap,
-//								HttpServletRequest request, HttpServletResponse response) throws Exception{
-//		String viewName = (String)request.getAttribute("veiwName");
-//		request.setCharacterEncoding("utf-8");
-//		response.setContentType("html/text;charset=utf-8");
-//		int scrapNO = 0;
-//		scrapNO = scrapService.scrapExpert(scrap);
-//		ModelAndView mav = new ModelAndView(viewName);
-//		return mav;
-//	}
 	
 	//delete scrap
 	@Override
@@ -193,8 +169,6 @@ public class ScrapControllerImpl implements ScrapController{
 		String compId = "compId";
 		scrapService.deleteExpertScrap(no);
 		ModelAndView mav = new ModelAndView("redirect:/scrap/printExpertScrap.do?compId=" + compId);
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("/scrap/printExpertScrap?compId="+compId);
 		return mav;
 		
 		
@@ -210,10 +184,6 @@ public class ScrapControllerImpl implements ScrapController{
 //		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
 		String compId = "compId";
 		ModelAndView mav = new ModelAndView("redirect:/scrap/printManuScrap.do?compId=" + compId);
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("/scrap/printManuScrap");
-//		mav.addObject("deleteManu", scrapService.deleteManuScrap(no));
-//		System.out.println("viewName = " +  mav);
 		return mav;
 	}
 	

@@ -54,7 +54,7 @@
 									<p>${expertScrap.expBizField }<br>${expertScrap.expTel }</p>
 									<a href="${contextPath }/viewExpert?id=${expertScrap.expid }" class="btn btn-primary">상세페이지</a>
 									<a href="${contextPath }/scrap/deleteExpertScrap.do?no=${expertScrap.no }" class="btn btn-primary">삭제</a>
-	<!-- 
+	<!-- sns 코드
 									<ul class="ftco-social text-center">
 	  	                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a></li>
 		                <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a></li>

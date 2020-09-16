@@ -40,8 +40,7 @@
 				<div class="row">
 				<!-- 제조업체 -->
 				
-				${manuScrapList }
-				
+
 					
 					<c:forEach var="allScrap" items="${manuScrapList }">
 					<!-- for -->
