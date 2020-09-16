@@ -38,5 +38,9 @@ public interface ScrapDAO {
 	
 	public int listExpScrapCount(String compId) throws Exception;
 
+	public int isOverlapE(String expId) throws Exception;
+
+	public int isOverlapM(String expId) throws Exception;
+
 
 }

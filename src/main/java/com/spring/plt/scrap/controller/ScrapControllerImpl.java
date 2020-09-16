@@ -1,5 +1,6 @@
 package com.spring.plt.scrap.controller;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -113,29 +114,50 @@ public class ScrapControllerImpl implements ScrapController{
 	@RequestMapping(value="/scrap/scrapExpert.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public void scrapExpert(@RequestParam("id") String expId,
 							HttpServletRequest request, HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
-		HttpSession session = request.getSession();
-//		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
-		String compId = "compId";
-		scrapVO.setCompid(compId);
-		scrapVO.setExpid(expId);
-		scrapService.scrapExpert(scrapVO);
+
+//		아래 else에서 alert기능을 실행하기 위해 임시로 넣은 코드입니다
+//		response.setCharacterEncoding("utf-8");
+//		PrintWriter out = response.getWriter();
+		int Overlapped = scrapService.isOverlapE(expId);
+		if(Overlapped == 0) {
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("html/text;charset=utf-8");
+			HttpSession session = request.getSession();
+	//		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
+			String compId = "compId";
+			scrapVO.setCompid(compId);
+			scrapVO.setExpid(expId);
+			scrapService.scrapExpert(scrapVO);
+		}
+		else {
+//			out.println("<script>");
+//			out.println("alert('중복된 요청입니다.');");
+//			out.println("history.go(-1);");
+//			out.println("</script>");
+			System.out.println("===========controller scrapExpert() 중복된 expid입니다===========");
+		}
+
 	}
 	
 	@Override
 	@RequestMapping(value="/scrap/scrapManu.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public void scrapManu(@RequestParam("id") String manuId,
 							HttpServletRequest request, HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
-		HttpSession session = request.getSession();
-//		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
-		String compId = "compId";
-		scrapVO.setCompid(compId);
-		scrapVO.setManuid(manuId);
-		scrapService.scrapManu(scrapVO);
-		System.out.println("scrapController�Ϸ�!");
+		int Overlapped = scrapService.isOverlapM(manuId);
+		if(Overlapped == 0) {
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("html/text;charset=utf-8");
+			HttpSession session = request.getSession();
+	//		String compId = (String)session.getAttribute("compId"); �α��� ��� ���� �Ǹ� �Է� �ּ� ���� �Ұ�
+			String compId = "compId";
+			scrapVO.setCompid(compId);
+			scrapVO.setManuid(manuId);
+			scrapService.scrapManu(scrapVO);
+		}
+		else {
+			System.out.println("===========controller scrapExpert() 중복된 manuid입니다===========");
+		}
+		
 	}
 	
 	

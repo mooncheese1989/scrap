@@ -58,6 +58,13 @@
 			where compId=#{compId}
 		]]>
 	</select>
+	
+	<select id="overlap" resultType="int">
+		<![CDATA[
+			select count(*) from manuscrap
+			where manuid=#{manuid}
+		]]>
+	</select>
 
 	
 

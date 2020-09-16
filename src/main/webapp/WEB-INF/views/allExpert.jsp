@@ -136,9 +136,9 @@
 	            	data:{"id":expertId},
 	            	dataType:"json",
 	            	success:function(data){
-	            		console.log("success")
+	            		alert("스크랩에 추가하였습니다.")
 	            	}
-	            });
+	            })
 			})
 		}
         

@@ -87,4 +87,13 @@ public class ScrapDAOImpl implements ScrapDAO{
 		return sqlSession.selectOne("mapper.expertScrap.listCount", compId);
 	}
 	
+	public int isOverlapE(String expId) throws Exception{
+		return sqlSession.selectOne("mapper.expertScrap.overlap", expId);
+	}
+	
+	public int isOverlapM(String expId) throws Exception{
+		return sqlSession.selectOne("mapper.manuScrap.overlap", expId);
+	}
+		
+	
 }
