@@ -40,14 +40,6 @@
 	</insert>
 
 
-<!--  
-	<insert id="scrapExpert" parameterType="scrapVO">
-		<![CDATA[
-			insert into expertscrap(no, compid, expid)
-			values(#{no}, #{compid}, #{expid})
-		]]>
-	</insert>
--->	
 	<delete id="deleteExpertScrap" parameterType="int">
 		<![CDATA[
 			delete from expertscrap	where no = #{no}

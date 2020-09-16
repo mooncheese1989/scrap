@@ -28,7 +28,7 @@ public class ScrapControllerImpl implements ScrapController{
 	private ScrapVO scrapVO;
 	
 	
-	//scarp ��� ���
+//	scrap출력
 	//전문가 * 출력
 	@Override
 	@RequestMapping(value="/scrap/printExpertScrap.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -84,9 +84,10 @@ public class ScrapControllerImpl implements ScrapController{
 	    Map compMap = new HashMap();
 	    compMap.put("compId", compId);
 	    compMap.put("pageVO", pageVO);
+	    System.out.println("=========compMap=" + compMap + " -- compId= " + compId );
 		List manuScrapAllList = scrapService.printManuScrapAll(compMap);
 		System.out.println("manuScrapAllList" + manuScrapAllList);
-		System.out.println("controller pageVO-----------------"+pageVO);
+		System.out.println("controller manuScrapAllList-----------------"+manuScrapAllList);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("manuScrapAllList", manuScrapAllList);
 		mav.addObject("pageVO", pageVO);

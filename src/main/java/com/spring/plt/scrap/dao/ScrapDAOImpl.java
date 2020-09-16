@@ -23,14 +23,12 @@ public class ScrapDAOImpl implements ScrapDAO{
 	@Override
 	public List<ScrapVO> printExpertScrap(String compId) throws DataAccessException{
 		List<ScrapVO> expertScrapList = sqlSession.selectList("mapper.expertScrap.printExpertScrap", compId);
-		System.out.println("ScrapDAO printExpertScrap(전문가 * 출력) 정상작동");
 		return expertScrapList;
 	}
 	
 	//전문가 * 출력
 	@Override
 	public List<ScrapVO> printExpertScrapAll(Map compMap) throws DataAccessException{
-		System.out.println("==============expert !!"+compMap);
 		List<ScrapVO> expertScrapAllList = sqlSession.selectList("mapper.expertScrap.printExpertScrapAll", compMap);
 		return expertScrapAllList;
 	}
@@ -45,7 +43,6 @@ public class ScrapDAOImpl implements ScrapDAO{
 	//제조업체 * 출력
 	@Override
 	public List<ScrapVO> printManuScrapAll(Map compMap) throws DataAccessException{
-		System.out.println("==============manu !!"+compMap);
 		List<ScrapVO> manuScrapAllList = sqlSession.selectList("mapper.manuScrap.printManuScrapAll", compMap);
 		return manuScrapAllList;
 		}
@@ -54,7 +51,6 @@ public class ScrapDAOImpl implements ScrapDAO{
 	@Override
 	public void scrapExpert(ScrapVO scrapVO) throws DataAccessException{
 		sqlSession.insert("mapper.expertScrap.scrapExpert", scrapVO);
-		System.out.println("scrapDAO query ���� �Ϸ�!");
 	}
 	
 	@Override

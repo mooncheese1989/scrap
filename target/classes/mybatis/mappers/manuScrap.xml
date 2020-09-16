@@ -20,13 +20,6 @@
 	</select>
 	
 	<select id="printManuScrapAll" resultMap="scrapResult" parameterType="java.util.Map">
-		
-		
-		
-		<!--     SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice
-			FROM manuscrap mns, manufacturer mn
-			WHERE compid = #{compid} and mns.manuid = mn.id
-			order by no desc  -->
 		<![CDATA[
 			 SELECT no, compid, manuid, manuname, manubiztype, productprice 
 	         FROM (SELECT mns.no, mns.compid, mns.manuid, mn.manuname, mn.manubiztype, mn.productprice,ROW_NUMBER() 
